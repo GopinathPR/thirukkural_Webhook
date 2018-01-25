@@ -62,17 +62,18 @@ def makeWebhookResult(data):
     kuralSet = data.get('KuralSet')
     if(kuralSet)is None:
         return{}
-    kural = kuralSet.get('Kural')
-    if(kural)is None:
+    kuralArray = kuralSet.get('Kural')
+    if(kuralArray)is None:
         return{}
+    kural= kuralArray[0]
     number = kural.get('Number')
     line1 = kural.get('Line1')
     line2 = kural.get('Line2')
     translation= kural.get('Translation')
     speech = line1+line2+translation
 
-    if (line1 is None) or (line2 is None) or (translation is None):
-        return {}
+    # if (line1 is None) or (line2 is None) or (translation is None):
+    #     return {}
 
 
     # print(json.dumps(item, indent=4))
@@ -94,3 +95,7 @@ if __name__ == '__main__':
     print("Starting app on port %d" % port)
 
     app.run(debug=False, port=port, host='0.0.0.0')
+    #to debug in local environmnet
+    # port = 8080
+    #
+    # app.run(debug=True, port=port, host='0.0.0.0')
